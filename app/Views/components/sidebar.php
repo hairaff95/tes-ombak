@@ -38,10 +38,17 @@
                     <i class="bi bi-receipt"></i>
                     <span>Kategori Produk</span>
                 </a>
-            </li><!-- End Produk Nav -->
+            </li><!-- End KategoriProduk Nav -->
         <?php
         }
         ?>
+
+        <li class="nav-item">
+                <a class="nav-link <?php echo (uri_string() == 'faq') ? "" : "collapsed" ?>" href="faq">
+                    <i class="bi bi-receipt"></i>
+                    <span>FAQ</span>
+                </a>
+            </li><!-- End faq Nav -->
 
 
         <li class="nav-item">
@@ -49,7 +56,7 @@
             <i class="bi bi-envelope"></i>
                 <span>Contact</span>
             </a>
-        </li><!-- End nama Nav -->
+        </li><!-- End contact Nav -->
     </ul>
 
 </aside><!-- End Sidebar-->

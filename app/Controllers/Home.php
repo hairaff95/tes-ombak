@@ -12,6 +12,8 @@ class Home extends BaseController
 
     function __construct()
     {
+        helper('form');
+        helper('number');
         $this->product = new ProductModel();
         $this->user = new UserModel(); 
         // <!--tambahan sendiri-->
