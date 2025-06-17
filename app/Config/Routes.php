@@ -48,5 +48,7 @@ $routes->get('faq', 'Home::faq', ['filter' => 'auth']);
 $routes->get('profile', 'Home::profile', ['filter' => 'auth']); 
 $routes->get('Contact', 'ContactController::index', ['filter' => 'auth']); 
 
+$routes->resource('api', ['controller' => 'apiController']);
+
 // $routes->get('nama file baru di View/errors', 'PageController::index', ['filter' => 'auth']);
 
