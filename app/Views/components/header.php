@@ -14,7 +14,14 @@
     <input type="text" name="query" placeholder="Search" title="Enter search keyword">
     <button type="submit" title="Search"><i class="bi bi-search"></i></button>
   </form>
+
 </div><!-- End Search Bar -->
+
+ <?php if (session()->has('diskon_nominal')) : ?>
+    <span class="w-80 badge bg-success ms-3" style="font-size: 16px;">
+      Hari ini ada diskon <?= number_format(session('diskon_nominal')) ?> per item
+    </span>
+  <?php endif; ?><!--diskon text-->
 
 <nav class="header-nav ms-auto">
   <ul class="d-flex align-items-center">

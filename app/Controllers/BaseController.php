@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\DiskonModel;
 
 /**
  * Class BaseController
@@ -51,6 +52,14 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
+        $diskonModel = new DiskonModel();
+        $diskonHariIni = $diskonModel->getHariIni();
+
+        if ($diskonHariIni) {
+            session()->set('diskon_nominal', $diskonHariIni['nominal']);
+        } else {
+            session()->remove('diskon_nominal'); // hapus jika tidak ada
+        }
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = service('session');

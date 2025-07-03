@@ -22,7 +22,7 @@
         ?>
             <li class="nav-item">
                 <a class="nav-link <?php echo (uri_string() == 'produk') ? "" : "collapsed" ?>" href="produk">
-                    <i class="bi bi-receipt"></i>
+                    <i class="bi bi-box-seam"></i>
                     <span>Produk</span>
                 </a>
             </li><!-- End Produk Nav -->
@@ -30,12 +30,20 @@
         }
         ?>
 
+        <?php if (session()->get('role') === 'admin') : ?>
+        <li class="nav-item">
+            <a class="nav-link <?= (uri_string() == 'diskon') ? '' : 'collapsed' ?>" href="<?= base_url('diskon') ?>">
+                <i class="bi bi-tag"></i><span>Diskon</span>
+            </a>
+        </li>
+    <?php endif; ?> <!--End Diskon Nav -->
+
         <?php
         if (session()->get('role') == 'admin') {
         ?>
             <li class="nav-item">
                 <a class="nav-link <?php echo (uri_string() == 'kategori') ? "" : "collapsed" ?>" href="kategori">
-                    <i class="bi bi-receipt"></i>
+                    <i class="bi bi-ui-checks-grid"></i>
                     <span>Kategori Produk</span>
                 </a>
             </li><!-- End KategoriProduk Nav -->
@@ -52,7 +60,7 @@
         
         <li class="nav-item">
                 <a class="nav-link <?php echo (uri_string() == 'faq') ? "" : "collapsed" ?>" href="faq">
-                    <i class="bi bi-receipt"></i>
+                    <i class="bi bi-question-circle"></i>
                     <span>FAQ</span>
                 </a>
             </li><!-- End faq Nav -->
@@ -60,7 +68,7 @@
 
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'Contact') ? "" : "collapsed" ?>" href="Contact">
-            <i class="bi bi-envelope"></i>
+            <i class="bi bi-person-lines-fill"></i>
                 <span>Contact</span>
             </a>
         </li><!-- End contact Nav -->

@@ -14,6 +14,13 @@ class Auth implements FilterInterface
         if (!session()->has('isLoggedIn')) {
             return redirect()->to(site_url('login'));
         }
+
+        //Pengecekan untuk role admin
+         if (is_array($arguments) && in_array('admin', $arguments)) {
+            if (session()->get('role') !== 'admin') {
+                return redirect()->to('/')->with('error', 'Akses hanya untuk admin.');
+            }
+        }
     }
 
     //--------------------------------------------------------------------

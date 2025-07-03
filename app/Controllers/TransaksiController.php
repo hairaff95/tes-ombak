@@ -33,17 +33,31 @@ class TransaksiController extends BaseController
     }
 
     public function cart_add()
-    {
-        $this->cart->insert(array(
-            'id'        => $this->request->getPost('id'),
-            'qty'       => 1,
-            'price'     => $this->request->getPost('harga'),
-            'name'      => $this->request->getPost('nama'),
-            'options'   => array('foto' => $this->request->getPost('foto'))
-        ));
-        session()->setflashdata('success', 'Produk berhasil ditambahkan ke keranjang. (<a href="' . base_url() . 'keranjang">Lihat</a>)');
-        return redirect()->to(base_url('/'));
-    }
+{
+    $id = $this->request->getPost('id');
+    $nama = $this->request->getPost('nama');
+    $harga = $this->request->getPost('harga');
+    $foto = $this->request->getPost('foto');
+
+    // Ambil diskon dari session
+    $diskon = session()->get('diskon_nominal') ?? 0;
+    $hargaSetelahDiskon = max(0, $harga - $diskon); // jangan sampai negatif
+
+    $this->cart->insert([
+        'id'      => $id,
+        'qty'     => 1,
+        'price'   => $hargaSetelahDiskon,
+        'name'    => $nama,
+        'options' => [
+            'foto' => $foto,
+            'harga_awal' => $harga,
+            'diskon' => $diskon
+        ]
+    ]);
+
+    session()->setFlashdata('success', 'Produk berhasil ditambahkan ke keranjang. (<a href="' . base_url() . 'keranjang">Lihat</a>)');
+    return redirect()->to(base_url('/'));
+}
 
     public function cart_clear()
     {
@@ -157,12 +171,16 @@ class TransaksiController extends BaseController
             $last_insert_id = $this->transaction->getInsertID();
 
             foreach ($this->cart->contents() as $value) {
+                $harga_awal = $value['options']['harga_awal'] ?? $value['price'];
+                $diskon = $value['options']['diskon'] ?? 0;
+                $harga_setelah_diskon = $harga_awal - $diskon;
+
                 $dataFormDetail = [
                     'transaction_id' => $last_insert_id,
                     'product_id' => $value['id'],
                     'jumlah' => $value['qty'],
-                    'diskon' => 0,
-                    'subtotal_harga' => $value['qty'] * $value['price'],
+                    'diskon' => $diskon,
+                    'subtotal_harga' => $value['qty'] * $harga_setelah_diskon,
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s")
                 ];

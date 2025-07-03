@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\DiskonModel;
 
 use App\Models\UserModel;
 
@@ -38,6 +39,13 @@ class AuthController extends BaseController
                         'role' => $dataUser['role'],
                         'isLoggedIn' => TRUE
                     ]);
+
+                    $diskonModel = new DiskonModel();
+                    $diskonHariIni = $diskonModel->where('tanggal', date('Y-m-d'))->first();
+
+                    if ($diskonHariIni) {
+                        session()->set('diskon_nominal', $diskonHariIni['nominal']);
+                    }
 
                     return redirect()->to(base_url('/'));
                 } else {

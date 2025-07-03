@@ -15,19 +15,26 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
   - Tampilan produk dengan gambar
   - Pencarian produk
 - Keranjang Belanja
-  - Tambah/hapus produk
-  - Update jumlah produk
+  - Tambah/hapus produk dari keranjang  
+  - Ubah jumlah produk  
+  - Hitung otomatis total belanja  
 - Sistem Transaksi
-  - Proses checkout
-  - Riwayat transaksi
+  - Checkout produk hanya untuk pengguna login  
+  - Penyimpanan riwayat transaksi pengguna  
+  - Tampilkan detail produk per transaksi  
 - Panel Admin
   - Manajemen produk (CRUD)
   - Manajemen kategori
   - Laporan transaksi
   - Export data ke PDF
 - Sistem Autentikasi
-  - Login/Register pengguna
-  - Manajemen akun
+  - Login dan Register pengguna  
+  - Autentikasi halaman menggunakan filter  
+  - Manajemen akun  
+- Halaman FAQ  
+  - Berisi pertanyaan umum tentang penggunaan aplikasi  
+  - Hanya bisa diakses oleh pengguna yang login  
+  - Menggunakan accordion dengan gaya dari template NiceAdmin  
 - UI Responsif dengan NiceAdmin template
 
 ## Persyaratan Sistem
@@ -79,11 +86,18 @@ Proyek menggunakan struktur MVC CodeIgniter 4:
   - AuthController.php - Autentikasi pengguna
   - ProdukController.php - Manajemen produk
   - TransaksiController.php - Proses transaksi
+  - FaqController.php - Faq Tampilan 
 - app/Models - Model untuk interaksi database
   - ProductModel.php - Model produk
   - UserModel.php - Model pengguna
+  - TransactionModel.php
+  - TransactionDetailModel.php
+  - DiskonModel.php
 - app/Views - Template dan komponen UI
   - a_produk.php - Tampilan produk
   - a_keranjang.php - Halaman keranjang
+  - a_checkout.php - Proses checkout
+  - a_profile.php - Riwayat transaksi
+  - a_faq.php - Halaman FAQ
 - public/img - Gambar produk dan aset
 - public/NiceAdmin - Template admin
